@@ -1,11 +1,12 @@
-import 'package:cardmonix/screen/Verification/otp_verification.dart';
 import 'package:flutter/material.dart';
 import 'package:cardmonix/screen/login_signup.dart';
 import 'package:cardmonix/screen/create_account.dart';
 import 'package:cardmonix/screen/User/dashboard.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
+  await dotenv.load();
   runApp(const MyApp());
 }
 

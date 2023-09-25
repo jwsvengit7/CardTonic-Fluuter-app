@@ -1,3 +1,13 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Constants {
-  static const String BASE_URL = "https://cardmonix-production.up.railway.app";
+  static String getBackendUrl() {
+    return dotenv.env['BACKEND_URL'] ?? '';
+  }
+
+  static bool get debugMode {
+    dotenv.load();
+    return dotenv.env['DEBUG'] == 'true';
+  }
+
 }

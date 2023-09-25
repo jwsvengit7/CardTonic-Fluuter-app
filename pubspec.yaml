@@ -32,6 +32,7 @@ dependencies:
 
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.0.3
   # qr_code_scanner: ^1.0.1
   # clipboard: ^0.4.4
   http: ^0.13.3
@@ -74,6 +75,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+     - .env
      - images/coins/usdt.jpeg
      - images/account.png
      - images/logo-app.jpeg
