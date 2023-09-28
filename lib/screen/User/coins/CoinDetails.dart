@@ -39,9 +39,9 @@ class _CoinDetailScreenState extends State<CoinDetailScreen> {
       print(coin);
       print(amount);
 
-      final saveToken = await APIService().getStoredToken();
+      final String? saveToken = await APIService().getStoredToken();
       print(saveToken);
-      final response = await APIService().tradeCoin(saveToken, coin, amount);
+      final response = await APIService().tradeCoin(saveToken!, coin, amount);
       print(response.statusCode);
       final Map<String, dynamic> data = json.decode(response.body);
       final dynamic api = data["data"];

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cardmonix/screen/User/dto/request/Request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cardmonix/helpers/constants.dart';
 import 'package:http/http.dart' as http;
@@ -10,8 +11,7 @@ class APIService {
       final response = await http.post(
         Uri.parse("${Constants.getBackendUrl()}/api/v1/auth/register"),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(
-            {"email": email, "password": password, "username": username}),
+        body: jsonEncode(Request.createRequest(username, email, password)),
       );
 
       if (response.statusCode == 200) {
@@ -30,7 +30,7 @@ class APIService {
       final response = await http.post(
         Uri.parse("${Constants.getBackendUrl()}/api/v1/auth/otp_verify"),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({"email": email, "otp": otp}),
+        body: jsonEncode(Request.verifyOtp(email, otp)),
       );
 
       if (response.statusCode == 200) {
@@ -48,7 +48,7 @@ class APIService {
       final response = await http.post(
         Uri.parse("${Constants.getBackendUrl()}/api/v1/auth/login"),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({"email": email, "password": password}),
+        body: jsonEncode(Request.loginRequest(email, password)),
       );
 
       if (response.statusCode == 200) {
@@ -106,7 +106,7 @@ class APIService {
         headers: {
           'Authorization': 'Bearer $saveToken',
         },
-        body: jsonEncode({"name": name, "amount": amount}));
+        body: jsonEncode(Request.createGiftcard(name, amount)));
   }
 
   Future<http.Response> getWallet(var saveToken) {
@@ -129,15 +129,9 @@ class APIService {
   }
 
   Future<http.Response> getAccountName(String accountNumber, String bankCode) {
-    final Map<String, String> params = {
-      'account_number': accountNumber,
-      'bank_code': bankCode,
-      'currency': 'NGN',
-    };
-
     return http.get(
-      Uri.parse("https://api.paystack.co/bank/resolve")
-          .replace(queryParameters: params),
+      Uri.parse("https://api.paystack.co/bank/resolve").replace(
+          queryParameters: Request.getAccountName(accountNumber, bankCode)),
       headers: {
         'Authorization':
             'Bearer sk_test_652cb496246c20a1a51456bdf96c12485b37cf7c',
@@ -159,16 +153,11 @@ class APIService {
       'Content-Type': 'application/json', // Specify the content type
     };
 
-    final requestBody = {
-      "accountNumber": accountNumber,
-      "bankName": bankName,
-      "accountName": accountName,
-    };
-
     final response = await http.post(
       uri,
       headers: headers,
-      body: jsonEncode(requestBody),
+      body: jsonEncode(
+          Request.createBankAccount(accountNumber, bankName, accountName)),
     );
 
     return response;
@@ -194,15 +183,16 @@ class APIService {
         });
   }
 
-  Future<http.Response> tradeCoin(var saveToken, var coin, var amount) async {
+  Future<http.Response> tradeCoin(
+      String saveToken, var coin, var amount) async {
     try {
       var response = await http.post(
           Uri.parse("${Constants.getBackendUrl()}/api/v1/deposit/buy-coin"),
           headers: {
             'Authorization': 'Bearer $saveToken',
           },
-          body: jsonEncode({"amount": amount, "coin": coin}));
-      if (response.statusCode == 200) {
+          body: jsonEncode(Request.traderequest(amount, coin)));
+      if (response.statusCode == 201) {
         return response;
       } else {
         return http.Response(response.body, response.statusCode);

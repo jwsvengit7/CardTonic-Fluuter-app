@@ -1,5 +1,7 @@
 import 'package:cardmonix/screen/User/dto/response/CoinsResponse.dart';
 import 'package:cardmonix/screen/User/dto/response/Giftcard.dart';
+import 'package:cardmonix/screen/User/dto/response/WalletResponse.dart';
+import 'package:cardmonix/screen/User/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:cardmonix/screen/User/coins/coins.dart';
 import 'package:cardmonix/screen/User/footer.dart';
@@ -13,6 +15,8 @@ class DashboardScreen extends StatefulWidget {
   DashboardScreenState createState() => DashboardScreenState();
 }
 
+enum TypeCoin { ETH, USDT, BTC }
+
 class DashboardScreenState extends State<DashboardScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -20,6 +24,7 @@ class DashboardScreenState extends State<DashboardScreen> {
   UserData? userInfo;
   List<Giftcard> giftcard = [];
   double amountApp = 0;
+  List<WalletResponse> items = [];
 
   Future<void> fetchGifcard() async {
     try {
@@ -34,9 +39,29 @@ class DashboardScreenState extends State<DashboardScreen> {
           price: coinJson['price'],
         );
       }).toList();
-      print(content);
-      print(giftcard[0].image);
       setState(() {});
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void getWallet() async {
+    try {
+      final saveToken = await APIService().getStoredToken();
+      final response = await APIService().getWallet(saveToken);
+      final Map<String, dynamic> data = json.decode(response.body);
+      final List<dynamic> list = data["data"];
+      setState(() {
+        items = list.map((itemData) {
+          return WalletResponse(
+            walletId: itemData['walletId'],
+            walletAmount: itemData['wallet_amount'],
+            walletInUsd: itemData['walletInUsd'],
+            coin: itemData['coin'],
+          );
+        }).toList();
+      });
+      print(items.length);
     } catch (e) {
       print(e);
     }
@@ -98,10 +123,7 @@ class DashboardScreenState extends State<DashboardScreen> {
             ),
           );
         });
-        print(userdetails["balance"]);
-        print(userdetails["balance"]["amount"]);
         amountApp = userdetails["balance"]["amount"];
-        print(amountApp);
       } else {
         print("Failed to fetch data. Status code: ${response.statusCode}");
       }
@@ -110,13 +132,21 @@ class DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
+  String getImage(String name) {
+    final matchingCoin = coinData.firstWhere(
+      (coin) => coin.name == name,
+    );
+
+    return matchingCoin.image;
+  }
+
   @override
   void initState() {
     super.initState();
     fetchGifcard();
-
     fetchData();
     fetchBalance();
+    getWallet();
   }
 
   @override
@@ -149,7 +179,6 @@ class DashboardScreenState extends State<DashboardScreen> {
       children: [
         Container(
           width: 400,
-          color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -208,71 +237,23 @@ class DashboardScreenState extends State<DashboardScreen> {
                     HomeFirst(coinData, amount: amountApp),
                     Container(
                       width: MediaQuery.devicePixelRatioOf(context),
-                      height: 600,
                       color: Colors.white,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Positioned(
-                            top: 0,
-                            child: Container(
-                              alignment: Alignment.center,
-                              width: 400,
-                              height: 80,
-                              child: Image.asset(
-                                "images/logo-app.jpeg",
-                                width: 60,
-                                height: 60,
-                              ),
-                            ),
-                          ),
                           Container(
-                            width: MediaQuery.of(context).size.width - 40,
-                            height: 140,
-                            margin: const EdgeInsets.symmetric(horizontal: 20),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.3),
-                                  blurRadius: 15,
-                                  spreadRadius: 5,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width - 40,
-                            height: 140,
-                            margin: const EdgeInsets.symmetric(horizontal: 20),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.3),
-                                  blurRadius: 15,
-                                  spreadRadius: 5,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width - 40,
-                            height: 140,
-                            margin: const EdgeInsets.symmetric(horizontal: 20),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.3),
-                                  blurRadius: 15,
-                                  spreadRadius: 5,
-                                ),
-                              ],
-                            ),
+                            width: MediaQuery.of(context).size.width - 30,
+                            height: 540,
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            child: ListView.builder(
+                                itemCount: items.length,
+                                itemBuilder: (context, index) {
+                                  final item = items[index];
+                                  return WalletCard(
+                                      item: item,
+                                      index: index,
+                                      coinData: coinData);
+                                }),
                           ),
                         ],
                       ),
