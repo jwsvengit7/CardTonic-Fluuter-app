@@ -1,5 +1,5 @@
-import 'package:cardmonix/screen/User/dto/response/Giftcard.dart';
-import 'package:cardmonix/screen/User/dto/response/UserDetails.dart';
+import 'package:cardmonix/dto/response/Giftcard.dart';
+import 'package:cardmonix/dto/response/UserDetails.dart';
 import 'package:cardmonix/screen/User/giftcards/giftcards.dart';
 import 'package:cardmonix/screen/User/history.dart';
 import 'package:cardmonix/screen/login_signup.dart';
@@ -11,7 +11,7 @@ class Drawers extends StatelessWidget {
   final UserData userData;
   final List<Giftcard> card;
 
-  Drawers({required this.userData, required this.card});
+  const Drawers({super.key, required this.userData, required this.card});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class Drawers extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   userData.user_name ?? "No User Name",
                   style: const TextStyle(
@@ -90,7 +90,7 @@ class Drawers extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => History()),
+                MaterialPageRoute(builder: (context) => const History()),
               );
             },
           ),
@@ -111,7 +111,8 @@ class Drawers extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => LoginSignupScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const LoginSignupScreen()),
               );
             },
           ),

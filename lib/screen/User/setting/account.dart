@@ -1,10 +1,12 @@
 import 'dart:convert';
-import 'package:cardmonix/screen/User/dto/response/Bank.dart';
+import 'package:cardmonix/dto/response/Bank.dart';
 import 'package:cardmonix/service/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Account extends StatefulWidget {
+  const Account({super.key});
+
   @override
   AccountState createState() => AccountState();
 }
@@ -17,7 +19,7 @@ class AccountState extends State<Account> {
   bool isSaveButtonDisabled = true;
 
   final accountNumberController = TextEditingController();
-  SizedBox sizedBox = SizedBox(height: 20);
+  SizedBox sizedBox = const SizedBox(height: 20);
 
   @override
   void initState() {
@@ -82,7 +84,7 @@ class AccountState extends State<Account> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Bank Account"),
+        title: const Text("Add Bank Account"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -110,7 +112,7 @@ class AccountState extends State<Account> {
                             value: bank,
                             child: SizedBox(
                               width: 300,
-                              child: Text('${bank.name}'),
+                              child: Text(bank.name),
                             ),
                           );
                         }).toList(),
@@ -149,11 +151,11 @@ class AccountState extends State<Account> {
 
   _load(bool isFetchingAccountName, String accountName) {
     if (isFetchingAccountName) {
-      return CircularProgressIndicator();
+      return const CircularProgressIndicator();
     } else if (accountName.isNotEmpty) {
       return Text(
         "Account Name: $accountName",
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.green,
           fontWeight: FontWeight.bold,
         ),
@@ -217,7 +219,10 @@ class AccountState extends State<Account> {
   Widget buildSaveButton(BuildContext context) {
     return ElevatedButton(
       onPressed: isSaveButtonDisabled ? null : _saveAccount,
-      child: Padding(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSaveButtonDisabled ? Colors.grey : Colors.blue,
+      ),
+      child: const Padding(
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
         child: Text(
           'Save Changes',
@@ -227,9 +232,6 @@ class AccountState extends State<Account> {
             fontWeight: FontWeight.bold,
           ),
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: isSaveButtonDisabled ? Colors.grey : Colors.blue,
       ),
     );
   }

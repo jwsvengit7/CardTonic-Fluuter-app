@@ -1,16 +1,18 @@
-import 'package:cardmonix/screen/User/dto/response/CoinsResponse.dart';
-import 'package:cardmonix/screen/User/dto/response/Giftcard.dart';
-import 'package:cardmonix/screen/User/dto/response/WalletResponse.dart';
+import 'package:cardmonix/dto/response/CoinsResponse.dart';
+import 'package:cardmonix/dto/response/Giftcard.dart';
+import 'package:cardmonix/dto/response/WalletResponse.dart';
 import 'package:cardmonix/screen/User/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:cardmonix/screen/User/coins/coins.dart';
 import 'package:cardmonix/screen/User/footer.dart';
 import 'package:cardmonix/screen/User/Drawers.dart';
-import 'package:cardmonix/screen/User/dto/response/UserDetails.dart';
+import 'package:cardmonix/dto/response/UserDetails.dart';
 import 'package:cardmonix/service/api_service.dart';
 import 'dart:convert';
 
 class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
+
   @override
   DashboardScreenState createState() => DashboardScreenState();
 }
@@ -133,11 +135,11 @@ class DashboardScreenState extends State<DashboardScreen> {
   }
 
   String getImage(String name) {
-    final matchingCoin = coinData.firstWhere(
-      (coin) => coin.name == name,
-    );
-
-    return matchingCoin.image;
+    return coinData
+        .firstWhere(
+          (coin) => coin.name == name,
+        )
+        .image;
   }
 
   @override
@@ -154,6 +156,45 @@ class DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawers(userData: userInfo ?? UserData(), card: giftcard),
+      appBar: AppBar(
+        toolbarHeight: 80,
+        leadingWidth: MediaQuery.devicePixelRatioOf(context),
+        title: Container(
+          width: 390,
+          color: Colors.white,
+          alignment: Alignment.centerRight,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              InkWell(
+                onTap: () {
+                  _scaffoldKey.currentState!.openDrawer();
+                },
+                child: const SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: Icon(Icons.menu, color: Colors.red, size: 35),
+                ),
+              ),
+              Container(
+                height: 100,
+                alignment: Alignment.center,
+                child: Image.asset(
+                  "images/logo-app.jpeg",
+                  width: 70,
+                  height: 70,
+                ),
+              ),
+              const Icon(
+                Icons.notification_add,
+                size: 30,
+                color: Colors.red,
+              ),
+            ],
+          ),
+        ),
+      ),
       body: SafeArea(
         child: FutureBuilder(
           future: fetchData(),
@@ -170,65 +211,18 @@ class DashboardScreenState extends State<DashboardScreen> {
           },
         ),
       ),
-      bottomNavigationBar: Footer(),
+      bottomNavigationBar: Footer(userData: userInfo ?? UserData()),
     );
   }
 
   Widget buildMainUI() {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           width: 400,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                height: 100,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    InkWell(
-                      onTap: () {
-                        _scaffoldKey.currentState!.openDrawer();
-                      },
-                      child: const SizedBox(
-                        width: 40,
-                        height: 40,
-                        child: Icon(Icons.menu, color: Colors.red, size: 35),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 200,
-                      height: 70,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 100,
-                            alignment: Alignment.center,
-                            child: Image.asset(
-                              "images/logo-app.jpeg",
-                              width: 70,
-                              height: 70,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 40,
-                      height: 40,
-                      child: Icon(
-                        Icons.notification_add,
-                        size: 30,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Expanded(
                 flex: 1,
                 child: ListView(

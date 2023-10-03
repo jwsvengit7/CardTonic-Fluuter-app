@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Password extends StatefulWidget {
+  const Password({super.key});
+
   @override
   PasswordState createState() => PasswordState();
 }
@@ -11,7 +13,7 @@ class PasswordState extends State<Password> {
   final oldPasswordController = TextEditingController();
   final passwordController = TextEditingController();
   final cpasswordController = TextEditingController();
-  SizedBox sizedBox = SizedBox(height: 20);
+  SizedBox sizedBox = const SizedBox(height: 20);
 
   @override
   void dispose() {
@@ -25,7 +27,7 @@ class PasswordState extends State<Password> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Password"),
+        title: const Text("Password"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -60,7 +62,7 @@ class PasswordState extends State<Password> {
       child: TextFormField(
         decoration: InputDecoration(
           labelText: text,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
           hintText: text,
         ),
       ),
@@ -71,7 +73,7 @@ class PasswordState extends State<Password> {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 244, 117, 54),
+        backgroundColor: const Color.fromARGB(255, 244, 117, 54),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),
@@ -80,7 +82,7 @@ class PasswordState extends State<Password> {
         width: 200,
         height: 50,
         alignment: Alignment.center,
-        child: Text(
+        child: const Text(
           "Change Password",
           style: TextStyle(
             fontSize: 15,

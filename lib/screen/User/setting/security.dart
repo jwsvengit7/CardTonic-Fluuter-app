@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Security extends StatefulWidget {
+  const Security({super.key});
+
   @override
   SecurityState createState() => SecurityState();
 }
@@ -10,7 +12,7 @@ class SecurityState extends State<Security> {
   Widget build(BuildContext buildContext) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Security"),
+        title: const Text("Security"),
       ),
     );
   }

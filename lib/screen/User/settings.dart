@@ -1,4 +1,4 @@
-import 'package:cardmonix/screen/User/dto/response/UserDetails.dart';
+import 'package:cardmonix/dto/response/UserDetails.dart';
 import 'package:cardmonix/screen/User/setting/account.dart';
 import 'package:cardmonix/screen/User/setting/contact.dart';
 import 'package:cardmonix/screen/User/setting/graph.dart';
@@ -10,23 +10,24 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Setting extends StatelessWidget {
-  Color color = Color.fromARGB(255, 237, 70, 41);
+  Color color = const Color.fromARGB(255, 237, 70, 41);
   UserData userData;
 
-  Setting({required this.userData});
+  Setting({super.key, required this.userData});
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Settings")),
       body: ListView(padding: EdgeInsets.zero, children: <Widget>[
         Container(
           width: 90,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CardContent()),
+                MaterialPageRoute(builder: (context) => const CardContent()),
               );
             },
             child: Row(
@@ -36,19 +37,19 @@ class Setting extends StatelessWidget {
                   "Edit Card",
                   style: TextStyle(fontSize: 20, color: color),
                 ),
-                Icon(Icons.card_membership),
+                const Icon(Icons.card_membership),
               ],
             ),
           ),
         ),
         Container(
           width: 90,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Graph()),
+                MaterialPageRoute(builder: (context) => const Graph()),
               );
             },
             child: Row(
@@ -58,19 +59,19 @@ class Setting extends StatelessWidget {
                   "View Graph",
                   style: TextStyle(fontSize: 20, color: color),
                 ),
-                Icon(Icons.graphic_eq_sharp),
+                const Icon(Icons.graphic_eq_sharp),
               ],
             ),
           ),
         ),
         Container(
           width: 90,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Wallet()),
+                MaterialPageRoute(builder: (context) => const Wallet()),
               );
             },
             child: Row(
@@ -80,19 +81,19 @@ class Setting extends StatelessWidget {
                   "Connect Wallet",
                   style: TextStyle(fontSize: 20, color: color),
                 ),
-                Icon(Icons.wallet_giftcard),
+                const Icon(Icons.wallet_giftcard),
               ],
             ),
           ),
         ),
         Container(
           width: 90,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Account()),
+                MaterialPageRoute(builder: (context) => const Account()),
               );
             },
             child: Row(
@@ -102,19 +103,19 @@ class Setting extends StatelessWidget {
                   "Add Account",
                   style: TextStyle(fontSize: 20, color: color),
                 ),
-                Icon(Icons.account_box),
+                const Icon(Icons.account_box),
               ],
             ),
           ),
         ),
         Container(
           width: 90,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Password()),
+                MaterialPageRoute(builder: (context) => const Password()),
               );
             },
             child: Row(
@@ -124,14 +125,14 @@ class Setting extends StatelessWidget {
                   "Passsword",
                   style: TextStyle(fontSize: 20, color: color),
                 ),
-                Icon(Icons.password),
+                const Icon(Icons.password),
               ],
             ),
           ),
         ),
         Container(
           width: 90,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: GestureDetector(
             onTap: () {
               Navigator.push(
@@ -147,19 +148,19 @@ class Setting extends StatelessWidget {
                   "Edit Contact Information",
                   style: TextStyle(fontSize: 20, color: color),
                 ),
-                Icon(Icons.history),
+                const Icon(Icons.history),
               ],
             ),
           ),
         ),
         Container(
           width: 90,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Security()),
+                MaterialPageRoute(builder: (context) => const Security()),
               );
             },
             child: Row(
@@ -169,7 +170,7 @@ class Setting extends StatelessWidget {
                   "Security",
                   style: TextStyle(fontSize: 20, color: color),
                 ),
-                Icon(Icons.security),
+                const Icon(Icons.security),
               ],
             ),
           ),

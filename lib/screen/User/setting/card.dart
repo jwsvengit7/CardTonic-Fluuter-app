@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:cardmonix/screen/User/dto/response/Bank.dart';
+import 'package:cardmonix/dto/response/Bank.dart';
 import 'package:cardmonix/service/api_service.dart';
 import 'package:http/http.dart' as http;
 
 class CardContent extends StatefulWidget {
+  const CardContent({super.key});
+
   @override
   CardState createState() => CardState();
 }
@@ -17,7 +19,7 @@ class CardState extends State<CardContent> {
   bool isSaveButtonDisabled = true;
 
   final accountNumberController = TextEditingController();
-  SizedBox sizedBox = SizedBox(height: 20);
+  SizedBox sizedBox = const SizedBox(height: 20);
 
   @override
   void initState() {
@@ -66,7 +68,7 @@ class CardState extends State<CardContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Card & INFO"),
+        title: const Text("My Card & INFO"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -80,7 +82,7 @@ class CardState extends State<CardContent> {
                 sizedBox,
                 sizedBox,
                 sizedBox,
-                Text("NO CARDS FOUND",
+                const Text("NO CARDS FOUND",
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -149,8 +151,11 @@ class CardState extends State<CardContent> {
   Widget buildSaveButton(BuildContext context) {
     return ElevatedButton(
       onPressed: isSaveButtonDisabled ? null : _saveAccount,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSaveButtonDisabled ? Colors.grey : Colors.blue,
+      ),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
         child: Text(
           'Save Changes',
           style: TextStyle(
@@ -159,9 +164,6 @@ class CardState extends State<CardContent> {
             fontWeight: FontWeight.bold,
           ),
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: isSaveButtonDisabled ? Colors.grey : Colors.blue,
       ),
     );
   }

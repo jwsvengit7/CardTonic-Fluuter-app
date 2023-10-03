@@ -7,7 +7,7 @@ import 'dart:convert';
 class Otp extends StatefulWidget {
   final String email;
 
-  Otp({required this.email});
+  const Otp({super.key, required this.email});
 
   @override
   _OtpState createState() => _OtpState();
@@ -22,7 +22,7 @@ class _OtpState extends State<Otp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("OTP")),
+      appBar: AppBar(title: const Text("OTP")),
       body: Column(
         children: [
           Container(
@@ -35,41 +35,41 @@ class _OtpState extends State<Otp> {
               height: 70,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             "Enter the OTP sent to ${widget.email}",
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Colors.red,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _buildOtpInputFields(),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: _verifyOtp,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 244, 117, 54),
+              backgroundColor: const Color.fromARGB(255, 244, 117, 54),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
-            child: Text(
+            child: const Text(
               "Verify OTP",
               style: TextStyle(color: Colors.white),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: _resendOtp,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 7, 127, 225),
+              backgroundColor: const Color.fromARGB(255, 7, 127, 225),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
-            child: Text(
+            child: const Text(
               "Resend OTP",
               style: TextStyle(color: Colors.white),
             ),
@@ -93,7 +93,7 @@ class _OtpState extends State<Otp> {
 
   Widget _buildOtpDigitField(TextEditingController controller) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         boxShadow: [
           BoxShadow(
             color: Color.fromARGB(229, 239, 236, 236),
@@ -112,7 +112,7 @@ class _OtpState extends State<Otp> {
               FocusScope.of(context).nextFocus();
             }
           },
-          style: Theme.of(context).textTheme.headline4,
+          style: Theme.of(context).textTheme.headlineMedium,
           keyboardType: TextInputType.number,
           inputFormatters: [
             LengthLimitingTextInputFormatter(1),

@@ -1,19 +1,19 @@
-import 'package:cardmonix/screen/User/dto/response/UserDetails.dart';
+import 'package:cardmonix/dto/response/UserDetails.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Giftcards extends StatelessWidget {
   UserData userData;
-  Giftcards({required this.userData});
+  Giftcards({super.key, required this.userData});
   SizedBox sizedBox = const SizedBox(height: 10);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sell Your Giftcards"),
+        title: const Text("Sell Your Giftcards"),
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -34,7 +34,7 @@ class Giftcards extends StatelessWidget {
                 );
               }).toList(),
               onChanged: (String? newValue) {},
-              hint: Text("Select a Giftcard Type"),
+              hint: const Text("Select a Giftcard Type"),
             ),
             sizedBox,
             const Text(
@@ -63,7 +63,7 @@ class Giftcards extends StatelessWidget {
             sizedBox,
             ElevatedButton.icon(
               onPressed: () {},
-              icon: Icon(Icons.cloud_upload),
+              icon: const Icon(Icons.cloud_upload),
               label: const Text("Upload Image"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
@@ -77,16 +77,16 @@ class Giftcards extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text("Sell Giftcard"),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  minimumSize: Size(200, 50),
+                  minimumSize: const Size(200, 50),
                   textStyle: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
                 ),
+                child: const Text("Sell Giftcard"),
               ),
             ),
           ],

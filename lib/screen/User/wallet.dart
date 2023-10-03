@@ -1,6 +1,6 @@
 import 'package:cardmonix/screen/User/dashboard.dart';
-import 'package:cardmonix/screen/User/dto/response/CoinsResponse.dart';
-import 'package:cardmonix/screen/User/dto/response/WalletResponse.dart';
+import 'package:cardmonix/dto/response/CoinsResponse.dart';
+import 'package:cardmonix/dto/response/WalletResponse.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -38,7 +38,7 @@ class WalletCardState extends State<WalletCard> {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => DashboardScreen(),
+            builder: (context) => const DashboardScreen(),
           ),
         );
       },
@@ -70,7 +70,7 @@ class WalletCardState extends State<WalletCard> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '${widget.item.coin}',
+                      widget.item.coin,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -78,7 +78,7 @@ class WalletCardState extends State<WalletCard> {
                       ),
                     ),
                     Text(
-                      '${TypeCoin.values[widget.index].name}',
+                      TypeCoin.values[widget.index].name,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.red,

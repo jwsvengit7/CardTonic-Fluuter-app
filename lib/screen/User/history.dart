@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:cardmonix/screen/User/dashboard.dart';
+import 'package:cardmonix/screen/User/profile/profile.dart';
 import 'package:cardmonix/screen/User/view/viewHistory.dart';
 import 'package:cardmonix/service/api_service.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,8 @@ class HistoryItem {
 }
 
 class History extends StatefulWidget {
+  const History({super.key});
+
   @override
   HistoryState createState() => HistoryState();
 }
@@ -77,8 +81,68 @@ class HistoryState extends State<History> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transaction History'),
-      ),
+          toolbarHeight: 120,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DashboardScreen(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                child: Container(
+                  width: 100,
+                  height: 40,
+                  alignment: Alignment.center,
+                  child: const Text(
+                    "Crypto History",
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DashboardScreen(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 244, 117, 54),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                child: Container(
+                  width: 100,
+                  height: 40,
+                  alignment: Alignment.center,
+                  child: const Text(
+                    "Giftcard History",
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )),
       body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {
@@ -93,7 +157,7 @@ class HistoryState extends State<History> {
 class TransactionCard extends StatelessWidget {
   final HistoryItem item;
 
-  TransactionCard({required this.item});
+  const TransactionCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +170,7 @@ class TransactionCard extends StatelessWidget {
         );
       },
       child: Card(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: ListTile(
             leading: Icon(
               item.status == "PENDING" ? Icons.access_time : Icons.check_circle,
@@ -120,13 +184,13 @@ class TransactionCard extends StatelessWidget {
                   children: [
                     Text(
                       '${item.coin} ${item.amountInCurrency}',
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 85, 83, 83)),
                     ),
                     Text(
                       'Amount \$${item.amount}',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

@@ -7,6 +7,8 @@ import 'dart:convert';
 import 'package:cardmonix/screen/User/dashboard.dart';
 
 class LoginSignupScreen extends StatefulWidget {
+  const LoginSignupScreen({super.key});
+
   @override
   _LoginSignupScreenState createState() => _LoginSignupScreenState();
 }
@@ -14,7 +16,7 @@ class LoginSignupScreen extends StatefulWidget {
 class _LoginSignupScreenState extends State<LoginSignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final SizedBox spaceHeight = SizedBox(height: 20);
+  final SizedBox spaceHeight = const SizedBox(height: 20);
 
   void _handleLogin() async {
     try {
@@ -61,7 +63,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DashboardScreen(),
+                    builder: (context) => const DashboardScreen(),
                   ),
                 );
               },
@@ -100,9 +102,9 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
         children: [
           Positioned(
             top: 0,
-            child: Container(
+            child: SizedBox(
               width: 400,
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width - 90,
                 height: 250,
               ),
@@ -189,7 +191,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     return ElevatedButton(
       onPressed: _handleLogin,
       style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-      child: Container(
+      child: const SizedBox(
         width: 280,
         height: 50,
         child: Center(
@@ -203,23 +205,23 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   }
 
   Widget _wrightContent(String text, String text2) {
-    return Container(
+    return SizedBox(
       width: 250,
       child: Center(
         child: Column(children: [
           Text(text),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CreateAccountScreen(),
+                  builder: (context) => const CreateAccountScreen(),
                 ),
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 244, 117, 54),
+              backgroundColor: const Color.fromARGB(255, 244, 117, 54),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
@@ -228,7 +230,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
               width: 100,
               height: 40,
               alignment: Alignment.center,
-              child: Text(
+              child: const Text(
                 "Create Account",
                 style: TextStyle(
                   fontSize: 13,

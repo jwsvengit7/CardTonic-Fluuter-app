@@ -1,21 +1,20 @@
+import 'package:cardmonix/dto/response/CoinsResponse.dart';
 import 'package:cardmonix/screen/User/coins/CoinDetails.dart';
 import 'package:flutter/material.dart';
-
-import '../dto/response/CoinsResponse.dart';
 
 // ignore: must_be_immutable
 class HomeFirst extends StatefulWidget {
   final List<Coin> coinData;
   double amount;
 
-  HomeFirst(this.coinData, {required this.amount});
+  HomeFirst(this.coinData, {super.key, required this.amount});
 
   @override
   HomeFirstState createState() => HomeFirstState();
 }
 
 class HomeFirstState extends State<HomeFirst> {
-  SizedBox spaceHeight = SizedBox(height: 20);
+  SizedBox spaceHeight = const SizedBox(height: 20);
   @override
   Widget build(BuildContext buildContext) {
     return Column(
@@ -54,9 +53,9 @@ class HomeFirstState extends State<HomeFirst> {
                   children: [
                     spaceHeight,
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        '\$${widget.amount == null ? 0 : widget.amount}',
+                        '\$${widget.amount ?? 0}',
                         style: const TextStyle(
                           color: Color.fromARGB(184, 255, 255, 255),
                           fontSize: 25,
@@ -75,7 +74,7 @@ class HomeFirstState extends State<HomeFirst> {
                         ),
                       ),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
                         'Active',
@@ -159,7 +158,7 @@ class HomeFirstState extends State<HomeFirst> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Text(
                           "\$${value.current_price}",
                           style: const TextStyle(
@@ -168,7 +167,7 @@ class HomeFirstState extends State<HomeFirst> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(

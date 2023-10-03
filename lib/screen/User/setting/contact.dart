@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:cardmonix/screen/User/dto/response/AccountInfoResponse.dart';
-import 'package:cardmonix/screen/User/dto/response/UserDetails.dart';
+import 'package:cardmonix/dto/response/AccountInfoResponse.dart';
+import 'package:cardmonix/dto/response/UserDetails.dart';
 import 'package:cardmonix/service/api_service.dart';
 import 'package:flutter/material.dart';
 
 class Contact extends StatefulWidget {
   final UserData userDetails;
-  Contact({required this.userDetails});
+  const Contact({super.key, required this.userDetails});
 
   @override
   _ContactState createState() => _ContactState();
@@ -53,10 +53,10 @@ class _ContactState extends State<Contact> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Information"),
+        title: const Text("Information"),
       ),
       body: ListView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         children: [
           buildContactInfoCard(
             "Name",
@@ -83,11 +83,11 @@ class _ContactState extends State<Contact> {
   Widget buildContactInfoCard(String title, String content) {
     return Card(
       elevation: 3.0,
-      margin: EdgeInsets.only(bottom: 16.0),
+      margin: const EdgeInsets.only(bottom: 16.0),
       child: ListTile(
         title: Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -100,7 +100,7 @@ class _ContactState extends State<Contact> {
       String title, String accountID, String memberSince) {
     return Card(
       elevation: 3.0,
-      margin: EdgeInsets.only(bottom: 16.0),
+      margin: const EdgeInsets.only(bottom: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

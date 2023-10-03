@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:cardmonix/screen/User/dto/request/Request.dart';
+import 'package:cardmonix/dto/request/Request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cardmonix/helpers/constants.dart';
 import 'package:http/http.dart' as http;
@@ -190,6 +190,7 @@ class APIService {
           Uri.parse("${Constants.getBackendUrl()}/api/v1/deposit/buy-coin"),
           headers: {
             'Authorization': 'Bearer $saveToken',
+            'Content-Type': 'application/json'
           },
           body: jsonEncode(Request.traderequest(amount, coin)));
       if (response.statusCode == 201) {
@@ -198,7 +199,6 @@ class APIService {
         return http.Response(response.body, response.statusCode);
       }
     } catch (e) {
-      print('Error: $e');
       return http.Response('Error: $e', 500);
     }
   }

@@ -4,9 +4,17 @@ import 'package:cardmonix/screen/create_account.dart';
 import 'package:cardmonix/screen/User/dashboard.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:cardmonix/onboarding_screen_example/onboarding_page.dart';
 
-void main() async {
+import 'package:shared_preferences/shared_preferences.dart';
+
+int? screen;
+Future<void> main() async {
   await dotenv.load();
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  screen =  pref.getInt("intscreen");
+  await pref.setInt("intscreen", 1);
   runApp(const MyApp());
 }
 
@@ -22,11 +30,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: "/dashboard",
+      initialRoute: (screen != 1 || screen == null) ? "/" : "/login",
       routes: {
-        '/': (context) => LoginSignupScreen(),
-        '/signup': (context) => CreateAccountScreen(),
-        '/dashboard': (context) => DashboardScreen(),
+        '/': (context) => OnBoardingPage(),
+        '/login': (context) => const LoginSignupScreen(),
+        '/signup': (context) => const CreateAccountScreen(),
+        '/dashboard': (context) => const DashboardScreen(),
       },
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Graph extends StatefulWidget {
+  const Graph({super.key});
+
   @override
   GraphState createState() => GraphState();
 }
@@ -10,7 +12,7 @@ class GraphState extends State<Graph> {
   Widget build(BuildContext buildContext) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Graph"),
+        title: const Text("Graph"),
       ),
     );
   }

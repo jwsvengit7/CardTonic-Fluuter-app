@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CreateAccountScreen extends StatefulWidget {
+  const CreateAccountScreen({super.key});
+
   @override
   CreateAccountScreenState createState() => CreateAccountScreenState();
 }
@@ -109,7 +111,7 @@ class CreateAccountScreenState extends State<CreateAccountScreen> {
                   _showSuccessDialog(context, message);
                 }
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -118,18 +120,18 @@ class CreateAccountScreenState extends State<CreateAccountScreen> {
   }
 
   Widget _wrightContent(String text, String text2) {
-    return Container(
+    return SizedBox(
       width: 250,
       child: Center(
         child: Column(children: [
           Text(text),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
-              Get.to(LoginSignupScreen());
+              Get.to(const LoginSignupScreen());
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 244, 117, 54),
+              backgroundColor: const Color.fromARGB(255, 244, 117, 54),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
@@ -138,7 +140,7 @@ class CreateAccountScreenState extends State<CreateAccountScreen> {
               width: 100,
               height: 40,
               alignment: Alignment.center,
-              child: Text(
+              child: const Text(
                 "Login",
                 style: TextStyle(
                   fontSize: 13,
@@ -159,9 +161,9 @@ class CreateAccountScreenState extends State<CreateAccountScreen> {
         children: [
           Positioned(
             top: 0,
-            child: Container(
+            child: SizedBox(
               width: 400,
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width - 90,
                 height: 200,
               ),
@@ -262,10 +264,10 @@ class CreateAccountScreenState extends State<CreateAccountScreen> {
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.red,
       ),
-      child: Container(
+      child: const SizedBox(
         width: 280,
         height: 50,
-        child: const Center(
+        child: Center(
           child: Text(
             'Signup',
             style: TextStyle(color: Colors.white),
@@ -277,6 +279,8 @@ class CreateAccountScreenState extends State<CreateAccountScreen> {
 }
 
 class LoadingSpinner extends StatelessWidget {
+  const LoadingSpinner({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const Center(
